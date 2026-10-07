@@ -1,0 +1,32 @@
+Q1: Convolution from scratch
+
+Input
+   1   1   1   0   0
+   0   1   1   1   0
+   0   0   1   1   1
+   0   0   1   1   0
+   0   1   1   0   0
+
+Filter
+   1   0   1
+   0   1   0
+   1   0   1
+
+Stride = 1, Padding = 0
+
+Output feature map
+   4   3   4
+   2   4   3
+   2   3   4
+
+Output shape: (3, 3)
+
+Effect of changing the stride from 1 to 2
+The filter steps two pixels instead of one. With N = 5, F = 3, and P = 0, the output size is floor((5 - 3) / 2) + 1 = 2, so the map is 2 x 2 instead of 3 x 3. Every other window is skipped, so the map is smaller and the spatial sampling is coarser. The four values below are the windows whose top-left corners are (0, 0), (0, 2), (2, 0), and (2, 2).
+
+Stride = 2, Padding = 0 (illustration only)
+Output feature map
+   4   4
+   2   4
+
+Output shape: (2, 2)

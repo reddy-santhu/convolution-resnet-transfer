@@ -1,0 +1,39 @@
+Q2: Freeze vs fine-tune
+
+Model: ResNet50, ImageNet weights, include_top=False, global average pooling
+New classifier: Dense(2), softmax
+Dataset: CIFAR-10 classes airplane (0) and automobile (1)
+Input: resized from 32x32 to 96x96, ResNet50 preprocess_input
+Train / val / test per class: 1500 / 300 / 400
+Epochs: 5, batch size: 32
+Frozen learning rate: 0.001
+Fine-tune learning rate: 0.0001
+Fine-tune trains conv5 kernels. Batch-norm stays frozen in both runs.
+Training time is the wall-clock time of model.fit. Accuracy is test accuracy.
+
+Method                    Trainable Parameters  Training Time   Test Accuracy
+Frozen Feature Extractor  4,098                   156.2 s         0.9812
+Fine-Tuned Network        14,957,570              297.5 s         0.9875
+
+Frozen training loss: 0.1067, 0.0403, 0.0230, 0.0139, 0.0094
+Fine-tune training loss: 0.1066, 0.0177, 0.0059, 0.0049, 0.0003
+Frozen validation accuracy: 0.9700, 0.9783, 0.9817, 0.9750, 0.9783
+Fine-tune validation accuracy: 0.9817, 0.9700, 0.9517, 0.9867, 0.9850
+
+Plot: /Users/santhu/Documents/Deeplearning/home-assignment-3/outputs/q2_training_loss.png
+
+Frozen trainable weights:
+  classifier: 4,098
+
+Fine-tune trainable weights:
+  conv5_block1_1_conv: 524,800
+  conv5_block1_2_conv: 2,359,808
+  conv5_block1_0_conv: 2,099,200
+  conv5_block1_3_conv: 1,050,624
+  conv5_block2_1_conv: 1,049,088
+  conv5_block2_2_conv: 2,359,808
+  conv5_block2_3_conv: 1,050,624
+  conv5_block3_1_conv: 1,049,088
+  conv5_block3_2_conv: 2,359,808
+  conv5_block3_3_conv: 1,050,624
+  classifier: 4,098
